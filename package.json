@@ -1,0 +1,16 @@
+{
+  "name": "grunt-setup",
+  "version": "0.1.0",
+  "description": "Grunt task runner setup",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-sass": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "jshint-stylish": "latest"
+  }
+}
