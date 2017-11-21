@@ -1,10 +1,8 @@
 module.exports = function(grunt) {
-
   // ===========================================================================
   // CONFIGURE GRUNT ===========================================================
   // ===========================================================================
   grunt.initConfig({
-
     // get the configuration info from package.json ----------------------------
     // this way we can use things like name and version (pkg.name)
     pkg: grunt.file.readJSON('package.json'),
@@ -20,7 +18,8 @@ module.exports = function(grunt) {
     // configure uglify to minify js files -------------------------------------
     uglify: {
       options: {
-        banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
+        banner:
+          '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
       },
       build: {
         files: {
@@ -31,7 +30,10 @@ module.exports = function(grunt) {
 
     // compile sass stylesheets to css -----------------------------------------
     sass: {
-      build: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
         files: {
           'src/css/style.css': 'src/scss/style.scss'
         }
@@ -48,43 +50,44 @@ module.exports = function(grunt) {
         files: {
           'src/css/style.css': 'src/css/style.css'
         }
-      },
-    },
-
-    // copy comiled css file to dist folder ------------------------------------
-    copy: {
-      main: {
-        expand: true,
-        cwd: 'src',
-        src: '**',
-        dest: 'dest/',
-      },
+      }
     },
 
     // configure cssmin to minify css files ------------------------------------
     cssmin: {
       options: {
-        banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
+        banner:
+          '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
       },
       build: {
         files: {
-          'dist/css/style.min.css': 'src/css/style.css'
+          'src/css/style.min.css': 'src/css/style.css'
         }
       }
     },
 
-    // configure watch to auto update ------------------------------------------
-    watch: {
-      stylesheets: {
-        files: ['src/**/*.css', 'src/**/*.scss'],
-        tasks: ['sass', 'cssmin']
-      },
-      scripts: {
-        files: 'src/**/*.js',
-        tasks: ['jshint', 'uglify']
+    // copy comiled css file to dist folder ------------------------------------
+    copy: {
+      css: {
+        expand: true,
+        src: 'src/css/*',
+        dest: 'dist/css/',
+        flatten: true,
+        filter: 'isFile'
       }
     }
 
+    // configure watch to auto update ------------------------------------------
+    // watch: {
+    //   stylesheets: {
+    //     files: ['src/**/*.css', 'src/**/*.scss'],
+    //     tasks: ['sass', 'cssmin']
+    //   },
+    //   scripts: {
+    //     files: 'src/**/*.js',
+    //     tasks: ['jshint', 'uglify']
+    //   }
+    // }
   });
 
   // ===========================================================================
@@ -92,18 +95,23 @@ module.exports = function(grunt) {
   // ===========================================================================
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-sass');
 
   // ===========================================================================
   // CREATE TASKS ==============================================================
   // ===========================================================================
-  grunt.registerTask('build', ['jshint', 'uglify', 'sass', 'autoprefixer', 'cssmin']);
+  grunt.registerTask('build', [
+    'jshint',
+    'uglify',
+    'sass',
+    'autoprefixer',
+    'cssmin',
+    'copy'
+  ]);
   grunt.registerTask('buildcss', ['sass', 'autoprefixer', 'cssmin']);
-  grunt.registerTask('watch', ['watch']);
-
+  // grunt.registerTask('watch', ['watch']);
 };

@@ -23,3 +23,24 @@ build/Release
 # Deployed apps should consider commenting this line out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
+
+
+# Exclude build folders
+dist/
+src/css/**
+
+# Exclude node modules
+node_modules/
+
+# Exclude sass cache files
+.sass-cache/
+*.sassc
+*.scssc
+
+# Exclude log and backup files
+*.log
+*.bkp
+*.backup
+
+# Exclude system bloat
+*.DS_Store

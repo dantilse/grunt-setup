@@ -1,14 +1,11 @@
 div {
-  background: #6F3596; }
+  color: #b8cc24;
+  background: #6f3596; }
 
 .some-class {
-  position: relative;
-  color: #CC594A;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-flow: row wrap;
-      flex-flow: row wrap; }
-
-.some-other-class {
-  display: block; }
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }

@@ -1,7 +1,7 @@
-$red      : #CC594A;
-$yellow   : #B8CC24;
-$blue     : #8BC5FF;
-$purple   : #6F3596;
+$red: #cc594a;
+$yellow: #b8cc24;
+$blue: #8bc5ff;
+$purple: #6f3596;
 
 // body     {
 //   background: $red;
@@ -13,16 +13,11 @@ $purple   : #6F3596;
 // }
 //
 div {
+  color: $yellow;
   background: $purple;
 }
 
 .some-class {
-  position: relative;
-  color: $red;
   display: flex;
-  flex-flow: row wrap;
-}
-
-.some-other-class {
-  display: block;
+  align-items: center;
 }
